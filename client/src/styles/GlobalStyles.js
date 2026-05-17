@@ -37,6 +37,11 @@ export const GlobalStyles = createGlobalStyle`
     transition: background 0.4s ease, color 0.4s ease;
     line-height: 1.7;
     min-height: 100vh;
+    overflow-x: hidden;
+  }
+  
+  html {
+    overflow-x: hidden;
   }
 
   a, button {
