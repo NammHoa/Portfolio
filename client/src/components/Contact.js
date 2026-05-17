@@ -104,14 +104,6 @@ const ContactInfoRow = styled(motion.div)`
   }
 `;
 
-const Footer = styled.footer`
-  margin-top: 80px;
-  padding: 20px 0;
-  font-family: monospace;
-  font-size: 14px;
-  color: ${({ theme }) => theme.secondary};
-  text-align: center;
-`;
 
 const Contact = () => {
   const { data: profile } = useQuery({ queryKey: ['profile'], queryFn: fetchProfile });
