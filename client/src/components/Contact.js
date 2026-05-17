@@ -96,8 +96,13 @@ const ContactInfoRow = styled(motion.div)`
 
   @media (max-width: 768px) {
     display: flex;
-    gap: 10px;
+    flex-direction: column;
+    gap: 15px;
     
+    .left, .center, .right {
+      justify-content: center;
+    }
+
     .separator {
       display: none;
     }
