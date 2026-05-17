@@ -3,7 +3,7 @@ import styled from 'styled-components';
 import { motion } from 'framer-motion';
 import { useQuery } from '@tanstack/react-query';
 import { fetchProjects } from '../api/api';
-import { FiGithub, FiExternalLink } from 'react-icons/fi';
+import { FiGithub } from 'react-icons/fi';
 
 const Section = styled.section`
   padding: 100px 0;
