@@ -189,7 +189,7 @@ const Projects = () => {
             <Links>
               {project.github.map((link, lIndex) => (
                 <a key={lIndex} href={link.url} target="_blank" rel="noreferrer">
-                  {lIndex === 0 ? <FiGithub /> : <FiExternalLink />} 
+                  <FiGithub /> 
                   {link.label}
                 </a>
               ))}
