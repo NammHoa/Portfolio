@@ -80,6 +80,17 @@ const TimelineContent = styled.div`
     margin-bottom: 15px;
     font-size: 16px;
     font-weight: 500;
+    
+    a {
+      color: inherit;
+      text-decoration: none;
+      transition: opacity 0.2s;
+      
+      &:hover {
+        text-decoration: underline;
+        opacity: 0.8;
+      }
+    }
   }
   
   .period {
@@ -117,7 +128,15 @@ const Experience = () => {
           >
             <TimelineContent>
               <h3>{exp.role}</h3>
-              <h4>{exp.company}</h4>
+              <h4>
+                {exp.companyLink ? (
+                  <a href={exp.companyLink} target="_blank" rel="noreferrer">
+                    {exp.company}
+                  </a>
+                ) : (
+                  exp.company
+                )}
+              </h4>
               <span className="period">{exp.period}</span>
               
               {exp.projects.map((proj, pIndex) => (

@@ -40,40 +40,67 @@ const ContactButton = styled(motion.a)`
   }
 `;
 
-const SocialLinks = styled(motion.div)`
-  display: flex;
-  justify-content: center;
-  gap: 30px;
+const ContactInfoRow = styled(motion.div)`
+  display: grid;
+  grid-template-columns: 1fr auto 1fr;
+  align-items: center;
+  width: 100%;
+  max-width: 800px;
   margin-top: 40px;
-  
+  font-size: 16px;
+  color: ${({ theme }) => theme.secondary};
+
   a {
     display: flex;
     align-items: center;
-    gap: 10px;
-    color: ${({ theme }) => theme.secondary};
-    font-size: 16px;
+    gap: 8px;
+    color: ${({ theme }) => theme.text};
+    text-decoration: none;
     font-weight: 500;
-    transition: all 0.3s ease;
-    padding: 10px 15px;
-    border-radius: 8px;
-    background: ${({ theme }) => theme.card};
-    border: 1px solid ${({ theme }) => theme.border};
-    
+    transition: color 0.2s;
+
     &:hover {
       color: ${({ theme }) => theme.primary};
-      border-color: ${({ theme }) => theme.primary};
-      transform: translateY(-3px);
+      text-decoration: underline;
     }
-
+    
     svg {
-      font-size: 20px;
+      font-size: 18px; /* Kích thước chuẩn cho icon */
     }
   }
 
-  @media (max-width: 768px) {
-    flex-direction: column;
+  .left {
+    display: flex;
+    justify-content: flex-end;
     align-items: center;
     gap: 15px;
+  }
+
+  .center {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 0 15px;
+  }
+
+  .right {
+    display: flex;
+    justify-content: flex-start;
+    align-items: center;
+    gap: 15px;
+  }
+
+  .separator {
+    color: ${({ theme }) => theme.border};
+  }
+
+  @media (max-width: 768px) {
+    display: flex;
+    gap: 10px;
+    
+    .separator {
+      display: none;
+    }
   }
 `;
 
@@ -123,22 +150,32 @@ const Contact = () => {
         Say Hello
       </ContactButton>
 
-      <SocialLinks
+      <ContactInfoRow
         initial={{ opacity: 0, y: 30 }}
         whileInView={{ opacity: 1, y: 0 }}
         viewport={{ once: false, amount: 0.3 }}
         transition={{ duration: 0.6, delay: 0.3 }}
       >
-        <a href={`tel:${profile.phone}`}>
-          <FiPhone /> {profile.phone}
-        </a>
-        <a href={`mailto:${profile.email}`}>
-          <FiMail /> Email Me
-        </a>
-        <a href={profile.github} target="_blank" rel="noreferrer">
-          <FiGithub /> GitHub
-        </a>
-      </SocialLinks>
+        <div className="left">
+          <a href={`tel:${profile.phone}`}>
+            <FiPhone /> {profile.phone}
+          </a>
+          <span className="separator">|</span>
+        </div>
+        
+        <div className="center">
+          <a href={`mailto:${profile.email}`}>
+            <FiMail /> {profile.email}
+          </a>
+        </div>
+        
+        <div className="right">
+          <span className="separator">|</span>
+          <a href={profile.github} target="_blank" rel="noreferrer">
+            <FiGithub /> GitHub
+          </a>
+        </div>
+      </ContactInfoRow>
     </Section>
   );
 };

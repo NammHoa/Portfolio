@@ -34,6 +34,7 @@ const portfolioData = {
     experience: [
         {
             company: "Lead Manament Solutions Company",
+            companyLink: "https://leaderp.vn/",
             period: "August 2025 - November 2025",
             role: "Fullstack Mobile Development Intern",
             projects: [
@@ -57,7 +58,7 @@ const portfolioData = {
                 "Database & Logic: Designed SQL Server schemas and implemented core features: shopping cart, search filters, and user authentication."
             ],
             github: [
-                { label: "Github", url: "#" }
+                { label: "Github", url: "https://github.com/NammHoa/Viren" }
             ],
             imageUrl: "https://via.placeholder.com/600x400/333333/ffffff?text=Viren+E-commerce"
         },
@@ -74,8 +75,8 @@ const portfolioData = {
                 "Database: Integrated MongoDB to handle scalable data storage for users and transactions."
             ],
             github: [
-                { label: "Frontend", url: "#" },
-                { label: "Backend", url: "#" }
+                { label: "Frontend", url: "https://github.com/NammHoa/TheGioiJack" },
+                { label: "Backend", url: "https://github.com/NammHoa/TheGioiJack_be" }
             ],
             imageUrl: "https://via.placeholder.com/600x400/333333/ffffff?text=TheGioijack+E-commerce"
         }
