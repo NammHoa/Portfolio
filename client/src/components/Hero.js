@@ -16,6 +16,8 @@ const HeroSection = styled.section`
   @media (max-width: 768px) {
     flex-direction: column-reverse;
     text-align: center;
+    justify-content: center;
+    gap: 40px;
   }
 `;
 
@@ -48,6 +50,7 @@ const ImageContainer = styled(motion.div)`
   @media (max-width: 768px) {
     width: 220px;
     height: 220px;
+    margin: 0 auto;
   }
 `;
 
