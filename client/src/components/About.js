@@ -63,26 +63,29 @@ const About = () => {
   return (
     <Section id="about">
       <SectionTitle
-        initial={{ opacity: 0, y: 20 }}
+        initial={{ opacity: 0, y: 50 }}
         whileInView={{ opacity: 1, y: 0 }}
-        viewport={{ once: true, amount: 0.5 }}
+        viewport={{ once: false, amount: 0.3 }}
+        transition={{ duration: 0.6 }}
       >
         About Me
       </SectionTitle>
-      
+
       <Content>
         <TextContent
-           initial={{ opacity: 0, x: -20 }}
-           whileInView={{ opacity: 1, x: 0 }}
-           viewport={{ once: true }}
+          initial={{ opacity: 0, x: -50 }}
+          whileInView={{ opacity: 1, x: 0 }}
+          viewport={{ once: false, amount: 0.3 }}
+          transition={{ duration: 0.6 }}
         >
           <p>{profile.about}</p>
         </TextContent>
-        
+
         <EducationBox
-           initial={{ opacity: 0, x: 20 }}
-           whileInView={{ opacity: 1, x: 0 }}
-           viewport={{ once: true }}
+          initial={{ opacity: 0, x: 50 }}
+          whileInView={{ opacity: 1, x: 0 }}
+          viewport={{ once: false, amount: 0.3 }}
+          transition={{ duration: 0.6 }}
         >
           <h3>Education</h3>
           {profile.education.map((edu, index) => (

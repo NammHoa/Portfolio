@@ -3,7 +3,7 @@ import { createGlobalStyle } from 'styled-components';
 export const lightTheme = {
   body: 'linear-gradient(135deg, #fdfbfb 0%, #ebedee 100%)',
   text: '#1a1a1a',
-  primary: '#2563eb', // Blue đậm hơn cho accessibility
+  primary: '#2563eb',
   secondary: '#4b5563',
   background: 'rgba(255, 255, 255, 0.7)',
   card: 'rgba(255, 255, 255, 0.6)',
@@ -14,7 +14,7 @@ export const lightTheme = {
 export const darkTheme = {
   body: 'linear-gradient(135deg, #0f172a 0%, #1e1e2f 100%)',
   text: '#f8fafc',
-  primary: '#3b82f6', // Xanh sáng dễ nhìn trên nền tối
+  primary: '#3b82f6',
   secondary: '#94a3b8',
   background: 'rgba(15, 23, 42, 0.6)',
   card: 'rgba(30, 41, 59, 0.6)',

@@ -3,14 +3,52 @@ import styled from 'styled-components';
 import { motion } from 'framer-motion';
 import { useQuery } from '@tanstack/react-query';
 import { fetchProfile } from '../api/api';
+import { FiGithub, FiFacebook } from 'react-icons/fi';
 
 const HeroSection = styled.section`
   min-height: 80vh;
   display: flex;
-  flex-direction: column;
-  justify-content: center;
-  align-items: flex-start;
+  align-items: center;
+  justify-content: space-between;
   padding: 100px 0;
+  gap: 80px; /* Tăng khoảng cách giữa chữ và ảnh để giao diện thoáng hơn */
+
+  @media (max-width: 768px) {
+    flex-direction: column-reverse;
+    text-align: center;
+  }
+`;
+
+const TextContent = styled.div`
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  
+  @media (max-width: 768px) {
+    align-items: center;
+  }
+`;
+
+const ImageContainer = styled(motion.div)`
+  width: 350px; /* Tăng kích thước ảnh để cân đối với khối chữ lớn */
+  height: 350px;
+  border-radius: 50%;
+  overflow: hidden;
+  border: 4px solid ${({ theme }) => theme.primary};
+  box-shadow: 0 10px 40px rgba(37, 99, 235, 0.3);
+  flex-shrink: 0;
+  
+  img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    object-position: top; /* Canh lề trên để lấy trọn phần tóc và mặt, không bị méo */
+  }
+
+  @media (max-width: 768px) {
+    width: 220px;
+    height: 220px;
+  }
 `;
 
 const Title = styled(motion.h1)`
@@ -29,41 +67,31 @@ const Subtitle = styled(motion.h2)`
   margin-bottom: 30px;
 `;
 
-const ButtonGroup = styled(motion.div)`
+const SocialIcons = styled(motion.div)`
   display: flex;
-  gap: 20px;
+  gap: 25px;
   margin-top: 30px;
-`;
 
-const PrimaryButton = styled.a`
-  padding: 14px 28px;
-  background-color: ${({ theme }) => theme.primary};
-  color: #fff;
-  border-radius: 8px;
-  font-weight: 600;
-  transition: all 0.3s ease;
-  box-shadow: 0 4px 15px rgba(37, 99, 235, 0.3);
-  
-  &:hover {
-    transform: translateY(-5px);
-    box-shadow: 0 8px 25px rgba(37, 99, 235, 0.5);
-  }
-`;
-
-const SecondaryButton = styled.a`
-  padding: 14px 28px;
-  background-color: transparent;
-  color: ${({ theme }) => theme.text};
-  border: 2px solid ${({ theme }) => theme.primary};
-  border-radius: 8px;
-  font-weight: 600;
-  transition: all 0.3s ease;
-  
-  &:hover {
-    transform: translateY(-5px);
-    background-color: ${({ theme }) => theme.primary};
-    color: #fff;
-    box-shadow: 0 8px 25px rgba(37, 99, 235, 0.5);
+  a {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 50px;
+    height: 50px;
+    border-radius: 50%;
+    background-color: transparent;
+    color: ${({ theme }) => theme.text};
+    border: 2px solid ${({ theme }) => theme.secondary};
+    font-size: 24px;
+    transition: all 0.3s ease;
+    
+    &:hover {
+      transform: translateY(-5px);
+      background-color: ${({ theme }) => theme.primary};
+      color: #fff;
+      border-color: ${({ theme }) => theme.primary};
+      box-shadow: 0 8px 25px rgba(37, 99, 235, 0.5);
+    }
   }
 `;
 
@@ -78,35 +106,52 @@ const Hero = () => {
 
   return (
     <HeroSection id="home">
-      <motion.div
-        initial={{ opacity: 0, y: 20 }}
-        animate={{ opacity: 1, y: 0 }}
-        transition={{ duration: 0.5, delay: 0.1 }}
-      >
-        <p style={{ color: 'var(--primary)', marginBottom: '20px', fontSize: '18px' }}>Hi, my name is</p>
-      </motion.div>
-      <Title
-        initial={{ opacity: 0, y: 20 }}
-        animate={{ opacity: 1, y: 0 }}
-        transition={{ duration: 0.5, delay: 0.2 }}
-      >
-        {profile?.name}
-      </Title>
-      <Subtitle
-        initial={{ opacity: 0, y: 20 }}
-        animate={{ opacity: 1, y: 0 }}
-        transition={{ duration: 0.5, delay: 0.3 }}
-      >
-        I am a {profile?.title}
-      </Subtitle>
-      <ButtonGroup
-        initial={{ opacity: 0, y: 20 }}
-        animate={{ opacity: 1, y: 0 }}
-        transition={{ duration: 0.5, delay: 0.4 }}
-      >
-        <PrimaryButton href="#projects">Check out my projects</PrimaryButton>
-        <SecondaryButton href={profile?.github} target="_blank" rel="noreferrer">GitHub</SecondaryButton>
-      </ButtonGroup>
+      <TextContent>
+        <motion.div
+          initial={{ opacity: 0, y: 20 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.5, delay: 0.1 }}
+        >
+          <p style={{ color: 'var(--primary)', marginBottom: '20px', fontSize: '18px' }}>Hi, my name is</p>
+        </motion.div>
+        <Title
+          initial={{ opacity: 0, y: 20 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.5, delay: 0.2 }}
+        >
+          {profile?.name}
+        </Title>
+        <Subtitle
+          initial={{ opacity: 0, y: 20 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.5, delay: 0.3 }}
+        >
+          I am a {profile?.title}
+        </Subtitle>
+        <SocialIcons
+          initial={{ opacity: 0, y: 20 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.5, delay: 0.4 }}
+        >
+          <a href="https://www.facebook.com/namzxjee/" target="_blank" rel="noreferrer" aria-label="Facebook">
+            <FiFacebook />
+          </a>
+          <a href={profile?.github} target="_blank" rel="noreferrer" aria-label="GitHub">
+            <FiGithub />
+          </a>
+        </SocialIcons>
+      </TextContent>
+
+      {profile?.github && (
+        <ImageContainer
+          initial={{ opacity: 0, scale: 0.8 }}
+          animate={{ opacity: 1, scale: 1 }}
+          transition={{ duration: 0.6, delay: 0.2 }}
+        >
+
+          <img src="/images/avatar.jpg" alt={profile?.name} />
+        </ImageContainer>
+      )}
     </HeroSection>
   );
 };

@@ -78,8 +78,12 @@ const containerVariants = {
 };
 
 const itemVariants = {
-  hidden: { opacity: 0, y: 20 },
-  visible: { opacity: 1, y: 0 }
+  hidden: { opacity: 0, y: 50 },
+  visible: { 
+    opacity: 1, 
+    y: 0,
+    transition: { duration: 0.5, ease: "easeOut" }
+  }
 };
 
 const Skills = () => {
@@ -90,9 +94,10 @@ const Skills = () => {
   return (
     <Section id="skills">
       <SectionTitle
-        initial={{ opacity: 0, y: 20 }}
+        initial={{ opacity: 0, y: 50 }}
         whileInView={{ opacity: 1, y: 0 }}
-        viewport={{ once: true }}
+        viewport={{ once: false, amount: 0.3 }}
+        transition={{ duration: 0.6 }}
       >
         Technical Skills
       </SectionTitle>
@@ -102,14 +107,14 @@ const Skills = () => {
         variants={containerVariants}
         initial="hidden"
         whileInView="visible"
-        viewport={{ once: true, amount: 0.2 }}
+        viewport={{ once: false, amount: 0.1 }}
       >
         {skills.map((skillGroup, index) => (
           <SkillCategory key={index} variants={itemVariants}>
             <h3>{skillGroup.category}</h3>
             <SkillTags>
               {skillGroup.items.map((item, i) => (
-                <Tag 
+                <Tag
                   key={i}
                   whileHover={{ scale: 1.05 }}
                   whileTap={{ scale: 0.95 }}

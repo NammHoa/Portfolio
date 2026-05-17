@@ -98,9 +98,10 @@ const Experience = () => {
   return (
     <Section id="experience">
       <SectionTitle
-        initial={{ opacity: 0, y: 20 }}
+        initial={{ opacity: 0, y: 50 }}
         whileInView={{ opacity: 1, y: 0 }}
-        viewport={{ once: true }}
+        viewport={{ once: false, amount: 0.3 }}
+        transition={{ duration: 0.6 }}
       >
         Work Experience
       </SectionTitle>
@@ -111,8 +112,8 @@ const Experience = () => {
             key={index}
             initial={{ opacity: 0, x: -50 }}
             whileInView={{ opacity: 1, x: 0 }}
-            viewport={{ once: true, amount: 0.5 }}
-            transition={{ delay: index * 0.2 }}
+            viewport={{ once: false, amount: 0.3 }}
+            transition={{ duration: 0.6, delay: index * 0.2 }}
           >
             <TimelineContent>
               <h3>{exp.role}</h3>

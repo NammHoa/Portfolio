@@ -57,7 +57,7 @@ const portfolioData = {
                 "Database & Logic: Designed SQL Server schemas and implemented core features: shopping cart, search filters, and user authentication."
             ],
             github: [
-                { label: "Github", url: "#" } // Sẽ thay bằng link thật nếu có
+                { label: "Github", url: "#" }
             ],
             imageUrl: "https://via.placeholder.com/600x400/333333/ffffff?text=Viren+E-commerce"
         },

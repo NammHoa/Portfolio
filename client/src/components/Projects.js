@@ -26,66 +26,57 @@ const SectionTitle = styled(motion.h2)`
   }
 `;
 
-const ProjectList = styled.div`
-  display: flex;
-  flex-direction: column;
-  gap: 80px;
-`;
-
-const ProjectCard = styled(motion.div)`
+const ProjectGrid = styled.div`
   display: grid;
-  grid-template-columns: 1fr 1fr;
-  gap: 40px;
-  align-items: center;
+  grid-template-columns: repeat(auto-fit, minmax(400px, 1fr));
+  gap: 30px;
+  align-items: stretch; /* Đảm bảo các thẻ có cùng chiều cao */
 
   @media (max-width: 768px) {
     grid-template-columns: 1fr;
   }
 `;
 
-const ProjectImage = styled.div`
-  width: 100%;
-  height: 100%;
-  border-radius: 12px;
-  overflow: hidden;
-  box-shadow: 0 10px 30px -15px rgba(0,0,0,0.3);
-  
-  img {
-    width: 100%;
-    height: 100%;
-    object-fit: cover;
-    transition: transform 0.3s ease;
-  }
+const ProjectCard = styled(motion.div)`
+  background: ${({ theme }) => theme.card};
+  backdrop-filter: ${({ theme }) => theme.glass};
+  -webkit-backdrop-filter: ${({ theme }) => theme.glass};
+  padding: 35px;
+  border-radius: 16px;
+  border: 1px solid ${({ theme }) => theme.border};
+  box-shadow: 0 4px 30px rgba(0, 0, 0, 0.05);
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+  display: flex;
+  flex-direction: column;
+  height: 100%; /* Cân bằng chiều cao */
 
-  &:hover img {
-    transform: scale(1.05);
+  &:hover {
+    transform: translateY(-8px);
+    box-shadow: 0 10px 40px rgba(37, 99, 235, 0.15); /* Primary glow */
   }
 `;
 
-const ProjectContent = styled.div`
-  display: flex;
-  flex-direction: column;
-
+const CardHeader = styled.div`
+  margin-bottom: 20px;
+  
   h3 {
-    font-size: 28px;
+    font-size: 24px;
     color: ${({ theme }) => theme.text};
-    margin-bottom: 10px;
+    margin-bottom: 5px;
   }
 
   .period {
     color: ${({ theme }) => theme.primary};
     font-size: 14px;
-    margin-bottom: 20px;
+    font-weight: 500;
   }
 `;
 
 const ProjectDetails = styled.div`
-  background-color: ${({ theme }) => theme.card};
-  padding: 25px;
-  border-radius: 8px;
-  box-shadow: 0 10px 30px -15px rgba(0,0,0,0.1);
-  margin-bottom: 20px;
-  z-index: 2;
+  color: ${({ theme }) => theme.secondary};
+  font-size: 15px;
+  margin-bottom: 25px;
+  flex-grow: 1;
 
   ul {
     list-style: none;
@@ -93,9 +84,7 @@ const ProjectDetails = styled.div`
   }
 
   li {
-    color: ${({ theme }) => theme.secondary};
-    font-size: 15px;
-    margin-bottom: 10px;
+    margin-bottom: 12px;
     
     strong {
       color: ${({ theme }) => theme.text};
@@ -106,24 +95,40 @@ const ProjectDetails = styled.div`
 const TechList = styled.ul`
   display: flex;
   flex-wrap: wrap;
-  gap: 15px;
+  gap: 10px;
   list-style: none;
-  margin-bottom: 20px;
-  color: ${({ theme }) => theme.secondary};
+  margin-bottom: 25px;
   font-family: monospace;
-  font-size: 14px;
+`;
+
+const TechTag = styled.li`
+  color: ${({ theme }) => theme.primary};
+  background: ${({ theme }) => theme.background};
+  border: 1px solid ${({ theme }) => theme.border};
+  padding: 6px 12px;
+  border-radius: 6px;
+  font-size: 13px;
 `;
 
 const Links = styled.div`
   display: flex;
   gap: 20px;
+  margin-top: auto;
 
   a {
+    display: flex;
+    align-items: center;
+    gap: 8px;
     color: ${({ theme }) => theme.text};
-    font-size: 22px;
+    font-size: 15px;
+    font-weight: 500;
     
     &:hover {
       color: ${({ theme }) => theme.primary};
+    }
+    
+    svg {
+      font-size: 20px;
     }
   }
 `;
@@ -136,65 +141,62 @@ const Projects = () => {
   return (
     <Section id="projects">
       <SectionTitle
-        initial={{ opacity: 0, y: 20 }}
+        initial={{ opacity: 0, y: 50 }}
         whileInView={{ opacity: 1, y: 0 }}
-        viewport={{ once: true }}
+        viewport={{ once: false, amount: 0.3 }}
+        transition={{ duration: 0.6 }}
       >
-        Some Things I've Built
+        Projects
       </SectionTitle>
 
-      <ProjectList>
+      <ProjectGrid>
         {projects.map((project, index) => (
           <ProjectCard
             key={project.id}
             initial={{ opacity: 0, y: 50 }}
             whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true, amount: 0.2 }}
-            transition={{ duration: 0.5 }}
-            style={{ direction: index % 2 !== 0 ? 'rtl' : 'ltr' }}
+            viewport={{ once: false, amount: 0.1 }}
+            transition={{ duration: 0.6, delay: index * 0.1 }}
           >
-            <ProjectImage>
-              <img src={project.imageUrl} alt={project.name} />
-            </ProjectImage>
-            
-            <ProjectContent style={{ direction: 'ltr', alignItems: index % 2 !== 0 ? 'flex-end' : 'flex-start', textAlign: index % 2 !== 0 ? 'right' : 'left' }}>
-              <span className="period">{project.period}</span>
+            <CardHeader>
               <h3>{project.name}</h3>
-              
-              <ProjectDetails>
-                <ul>
-                  {project.details.map((detail, dIndex) => {
+              <div className="period">{project.period}</div>
+            </CardHeader>
+            
+            <ProjectDetails>
+              <ul>
+                {project.details.map((detail, dIndex) => {
+                  if (detail.includes(':')) {
                     const [title, ...descArr] = detail.split(':');
                     const desc = descArr.join(':');
                     return (
-                      <li key={dIndex} style={{ textAlign: 'left' }}>
+                      <li key={dIndex}>
                         <strong>{title}:</strong>{desc}
                       </li>
                     );
-                  })}
-                </ul>
-              </ProjectDetails>
-              
-              <TechList>
-                {project.techStack.map((tech, tIndex) => (
-                  <li key={tIndex}>{tech}</li>
-                ))}
-              </TechList>
-              
-              <Links>
-                {project.github.map((link, lIndex) => (
-                  <a key={lIndex} href={link.url} target="_blank" rel="noreferrer" title={link.label}>
-                    <FiGithub />
-                  </a>
-                ))}
-                <a href="#" target="_blank" rel="noreferrer" title="Live Demo">
-                  <FiExternalLink />
+                  }
+                  return <li key={dIndex}>{detail}</li>;
+                })}
+              </ul>
+            </ProjectDetails>
+            
+            <TechList>
+              {project.techStack.map((tech, tIndex) => (
+                <TechTag key={tIndex}>{tech}</TechTag>
+              ))}
+            </TechList>
+            
+            <Links>
+              {project.github.map((link, lIndex) => (
+                <a key={lIndex} href={link.url} target="_blank" rel="noreferrer">
+                  {lIndex === 0 ? <FiGithub /> : <FiExternalLink />} 
+                  {link.label}
                 </a>
-              </Links>
-            </ProjectContent>
+              ))}
+            </Links>
           </ProjectCard>
         ))}
-      </ProjectList>
+      </ProjectGrid>
     </Section>
   );
 };

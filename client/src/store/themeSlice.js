@@ -1,7 +1,7 @@
 import { createSlice } from '@reduxjs/toolkit';
 
 const initialState = {
-  isDarkMode: true, // Mặc định là Dark mode để trông hiện đại hơn
+  isDarkMode: true,
 };
 
 export const themeSlice = createSlice({
